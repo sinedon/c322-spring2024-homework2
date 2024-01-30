@@ -25,7 +25,7 @@ public class InventoryController {
         }
     }
 
-    @GetMapping("/{serialNumber}")
+    @GetMapping("/search")
     public Guitar getGuitar(@PathVariable String serialNumber) {
         try {
             System.out.println("Serial Number: " + serialNumber);
@@ -37,7 +37,7 @@ public class InventoryController {
         }
     }
 
-    @GetMapping("/search-guitars")
+    @GetMapping("/search")
     public List<Guitar> searchGuitars(
             @RequestParam(required = false) String serialNumber,
             @RequestParam(required = false) Double price,

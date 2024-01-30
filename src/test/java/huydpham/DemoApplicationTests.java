@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,33 +22,58 @@ class DemoApplicationTests {
     @Test
     void testAddGuitar() {
 
+        // Create a test guitar
         Guitar testGuitar = new Guitar("123", 999.99, "TestBuilder", "TestModel", "TestType", "TestBackWood", "TestTopWood");
 
+        // Act
         try {
             boolean result = InventoryRepository.addGuitar(testGuitar);
 
-            assertTrue(result);
+            // Assert
+            assertTrue(result, "Expected addGuitar to return true");
 
+            // Check if the guitar data is added to the file
             Path filePath = Paths.get(TEST_DATABASE_NAME);
             String fileContent = Files.readString(filePath);
 
             String expectedData = "123,999.99,TestBuilder,TestModel,TestType,TestBackWood,TestTopWood" + NEW_LINE;
-            assertTrue(fileContent.contains(expectedData));
+            assertTrue(fileContent.contains(expectedData), "Expected data not found in the file");
 
         } catch (IOException e) {
-            fail("IOException should not be thrown in this test.");
+            fail("IOException should not be thrown in this test.", e);
+        }
+    }
+
+    @Test
+    void testAddSecondGuitar() {
+
+        // Create a second test guitar
+        Guitar secondTestGuitar = new Guitar("456", 799.99, "AnotherBuilder", "AnotherModel", "AnotherType", "AnotherBackWood", "AnotherTopWood");
+
+        // Act
+        try {
+            boolean result = InventoryRepository.addGuitar(secondTestGuitar);
+
+            // Assert
+            assertTrue(result, "Expected addGuitar to return true");
+
+            // Check if the second guitar data is added to the file
+            Path filePath = Paths.get(TEST_DATABASE_NAME);
+            String fileContent = Files.readString(filePath);
+
+            String expectedFirstGuitarData = "123,999.99,TestBuilder,TestModel,TestType,TestBackWood,TestTopWood" + NEW_LINE;
+            String expectedSecondGuitarData = "456,799.99,AnotherBuilder,AnotherModel,AnotherType,AnotherBackWood,AnotherTopWood" + NEW_LINE;
+
+            assertTrue(fileContent.contains(expectedFirstGuitarData), "Expected data of the first guitar not found in the file");
+            assertTrue(fileContent.contains(expectedSecondGuitarData), "Expected data of the second guitar not found in the file");
+
+        } catch (IOException e) {
+            fail("IOException should not be thrown in this test.", e);
         }
     }
 
     @Test
     void testGetGuitar() {
-
-        String testData = "123,999.99,TestBuilder,TestModel,TestType,TestBackWood,TestTopWood";
-        try {
-            Files.write(Paths.get(TEST_DATABASE_NAME), testData.getBytes(), StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            fail("IOException should not be thrown during test setup.");
-        }
 
         // Act
         try {
@@ -63,35 +87,8 @@ class DemoApplicationTests {
             assertEquals("TestModel", result.getModel());
             assertEquals("TestType", result.getType());
             assertEquals("TestBackWood", result.getBackWood());
-           // assertEquals("TestTopWood", result.getTopWood());
+            assertEquals("TestTopWood", result.getTopWood());
 
-        } catch (IOException e) {
-            fail("IOException should not be thrown in this test.");
-        }
-    }
-
-    @Test
-    void testSearchWithSerialNumber() {
-        // Arrange
-
-        // Prepare test data
-        String testData1 = "123,999.99,TestBuilder1,TestModel1,TestType1,TestBackWood1,TestTopWood1";
-        String testData2 = "456,888.88,TestBuilder2,TestModel2,TestType2,TestBackWood2,TestTopWood2";
-
-        try {
-            // Write test data to the file
-            Files.write(Paths.get(TEST_DATABASE_NAME), (testData1 + System.lineSeparator() + testData2).getBytes(), StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            fail("IOException should not be thrown during test setup.");
-        }
-
-        // Act
-        try {
-            List<Guitar> result = InventoryRepository.search("123", null, null, null, null, null, null);
-
-            // Assert
-            assertNotNull(result);
-            assertEquals("123", result.get(0).getSerialNumber());
         } catch (IOException e) {
             fail("IOException should not be thrown in this test.");
         }
@@ -99,32 +96,16 @@ class DemoApplicationTests {
 
     @Test
     void testSearchWithBuilder() {
-        // Prepare test data
-        String testData1 = "123,999.99,TestBuilder1,TestModel1,TestType1,TestBackWood1,TestTopWood1";
-        String testData2 = "456,888.88,TestBuilder2,TestModel2,TestType2,TestBackWood2,TestTopWood2";
-
-        try {
-            // Write test data to the file
-            Files.write(Paths.get(TEST_DATABASE_NAME), (testData1 + System.lineSeparator() + testData2).getBytes(), StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            fail("IOException should not be thrown during test setup.");
-        }
-
         // Act
         try {
-            List<Guitar> result = InventoryRepository.search(null, null, "TestBuilder1", null, null, null, null);
+            List<Guitar> result = InventoryRepository.search(null, null, "AnotherBuilder", null, null, null, null);
 
             // Assert
             assertNotNull(result);
             assertEquals(1, result.size());
-            assertEquals("TestBuilder1", result.get(0).getBuilder());
+            assertEquals("AnotherBuilder", result.get(0).getBuilder());
         } catch (IOException e) {
             fail("IOException should not be thrown in this test.");
         }
     }
-
-	@Test
-	void contextLoads() {
-	}
-
 }

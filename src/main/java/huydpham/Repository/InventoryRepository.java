@@ -1,6 +1,5 @@
 package huydpham.Repository;
 import huydpham.Model.Guitar;
-import huydpham.Controllers.InventoryController;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -34,8 +33,8 @@ public class InventoryRepository {
                 guitar.getModel() + "," +
                 guitar.getType() + "," +
                 guitar.getBackWood() + "," +
-                guitar.getTopWood();
-        appendToFile(path, data + NEW_LINE);
+                guitar.getTopWood() + NEW_LINE;
+        appendToFile(path, data);
         return true;
     }
 
@@ -49,7 +48,7 @@ public class InventoryRepository {
 
                 return new Guitar(
                         guitarData[0],                           // serialNumber
-                        Double.parseDouble(guitarData[1]),      // price
+                        Double.parseDouble(guitarData[1]),       // price
                         guitarData[2],                           // builder
                         guitarData[3],                           // model
                         guitarData[4],                           // type
@@ -72,7 +71,7 @@ public class InventoryRepository {
             if (guitarData.length == 7) {
                 Guitar guitar = new Guitar(
                         guitarData[0],                           // serialNumber
-                        Double.parseDouble(guitarData[1]),      // price
+                        Double.parseDouble(guitarData[1]),       // price
                         guitarData[2],                           // builder
                         guitarData[3],                           // model
                         guitarData[4],                           // type
@@ -107,6 +106,4 @@ public class InventoryRepository {
                 .filter(guitar -> topWood == null || guitar.getTopWood().equals(topWood))
                 .collect(Collectors.toList());
     }
-
-
 }
