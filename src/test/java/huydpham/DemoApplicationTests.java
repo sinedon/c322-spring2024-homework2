@@ -37,7 +37,7 @@ class DemoApplicationTests {
             assertTrue(fileContent.contains(expectedData), "Expected data not found in the file");
 
         } catch (IOException e) {
-            fail("IOException should not be thrown in this test.", e);
+            fail("IOException should not be thrown in this test", e);
         }
     }
 
