@@ -81,7 +81,7 @@ class DemoApplicationTests {
             assertEquals("TestTopWood", result.getTopWood());
 
         } catch (IOException e) {
-            fail("IOException should not be thrown in this test.");
+            fail("IOException should not be thrown in this test");
         }
     }
 
