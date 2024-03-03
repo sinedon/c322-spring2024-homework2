@@ -1,21 +1,22 @@
 package huydpham.Model;
+
 public class Guitar {
     String serialNumber;
     double price;
-    String builder;
+    Builder builder;
     String model;
-    String type;
-    String backWood;
-    String topWood;
+    Type type;
+    Wood backWood;
+    Wood topWood;
 
-    public Guitar(String sNum, double price, String builder, String model, String type, String backWood, String topWood) {
+    public Guitar(String sNum, double price, Builder builder, String model, Type type, Wood backWood, Wood topWood) {
         this.serialNumber = sNum;
         this.price = price;
-        this.builder = builder;
+        setBuilder(builder);
         this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+        setType(type);
+        setBackWood(backWood);
+        setTopWood(topWood);
     }
 
     public String getSerialNumber() {
@@ -34,11 +35,11 @@ public class Guitar {
         this.price = price;
     }
 
-    public String getBuilder() {
+    public Builder getBuilder() {
         return builder;
     }
 
-    public void setBuilder(String builder) {
+    public void setBuilder(Builder builder) {
         this.builder = builder;
     }
 
@@ -50,27 +51,27 @@ public class Guitar {
         this.model = model;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public String getBackWood() {
+    public Wood getBackWood() {
         return backWood;
     }
 
-    public void setBackWood(String backWood) {
+    public void setBackWood(Wood backWood) {
         this.backWood = backWood;
     }
 
-    public String getTopWood() {
+    public Wood getTopWood() {
         return topWood;
     }
 
-    public void setTopWood(String topWood) {
+    public void setTopWood(Wood topWood) {
         this.topWood = topWood;
     }
 }
