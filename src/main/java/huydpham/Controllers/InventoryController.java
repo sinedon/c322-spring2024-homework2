@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/guitars")
 public class InventoryController {
     private final InventoryRepository inventoryRepository;
@@ -69,4 +70,5 @@ public class InventoryController {
             return null;
         }
     }
+
 }
