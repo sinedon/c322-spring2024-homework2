@@ -4,6 +4,7 @@ import huydpham.Model.Builder;
 import huydpham.Model.Guitar;
 import huydpham.Model.Type;
 import huydpham.Model.Wood;
+import huydpham.Repository.InventoryFileRepository;
 import huydpham.Repository.InventoryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,10 +29,10 @@ class DemoApplicationTests {
     void setup() {
         try {
             Guitar testGuitar = new Guitar("123", 999.99, Builder.FENDER, "TestModel", Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.CEDAR);
-            boolean result1 = InventoryRepository.addGuitar(testGuitar);
+            boolean result1 = InventoryFileRepository.addGuitar(testGuitar);
 
             Guitar secondTestGuitar = new Guitar("456", 799.99, Builder.MARTIN, "AnotherModel", Type.ELECTRIC, Wood.MAHOGANY, Wood.MAPLE);
-            boolean result2 = InventoryRepository.addGuitar(secondTestGuitar);
+            boolean result2 = InventoryFileRepository.addGuitar(secondTestGuitar);
 
             assertTrue(result1 && result2, "Failed to add guitars to the database");
 
@@ -53,7 +54,7 @@ class DemoApplicationTests {
         Guitar testGuitar = new Guitar("123", 999.99, Builder.FENDER, "TestModel", Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.CEDAR);
 
         try {
-            boolean result = InventoryRepository.addGuitar(testGuitar);
+            boolean result = InventoryFileRepository.addGuitar(testGuitar);
 
             assertTrue(result, "Expected addGuitar to return true");
 
@@ -73,7 +74,7 @@ class DemoApplicationTests {
         Guitar secondTestGuitar = new Guitar("456", 799.99, Builder.MARTIN, "AnotherModel", Type.ELECTRIC, Wood.MAHOGANY, Wood.MAPLE);
 
         try {
-            boolean result = InventoryRepository.addGuitar(secondTestGuitar);
+            boolean result = InventoryFileRepository.addGuitar(secondTestGuitar);
 
             assertTrue(result, "Expected addGuitar to return true");
 
@@ -95,7 +96,7 @@ class DemoApplicationTests {
     void testGetGuitar() {
 
         try {
-            Guitar result = InventoryRepository.getGuitar("123");
+            Guitar result = InventoryFileRepository.getGuitar("123");
 
             assertNotNull(result);
             assertEquals("123", result.getSerialNumber());
@@ -114,7 +115,7 @@ class DemoApplicationTests {
     @Test
     void testSearchWithBuilder() {
         try {
-            List<Guitar> result = InventoryRepository.search(null, null, String.valueOf(Builder.MARTIN), null, null, null, null);
+            List<Guitar> result = InventoryFileRepository.search(null, null, String.valueOf(Builder.MARTIN), null, null, null, null);
 
             assertNotNull(result);
             assertEquals(1, result.size());

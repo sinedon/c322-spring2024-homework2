@@ -1,2 +1,3 @@
 john,$2a$10$Hu6TVUZrOd84tNtdlB491OBWNnCfDM.Ji1kgP1/fTn4aIHi8a3o72,john@email.com
 sinedon,$2a$10$wuMCVK/Py/7DP4yKKrrVBuKQBKf8iBjs7tE1AmyljvDIM1wCrzr26,phamhuduc@gmail.com
+sine,$2a$10$w4210UVf8MzmTpPoF.HtquLrj.rL9uxTuZWAyCq8MaWkzmQUefV76,newemail@gmail.com

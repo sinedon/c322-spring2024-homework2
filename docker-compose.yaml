@@ -1,0 +1,10 @@
+services:
+  guitar-database:
+    image: postgres:alpine
+    container_name: guitar-database
+    ports:
+      - "6002:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: guitar

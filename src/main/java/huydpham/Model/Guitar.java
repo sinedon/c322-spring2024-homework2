@@ -1,13 +1,25 @@
 package huydpham.Model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(schema = "guitar")
 public class Guitar {
+    @Id
     String serialNumber;
     double price;
+    @Enumerated(EnumType.STRING)
     Builder builder;
     String model;
+    @Enumerated(EnumType.STRING)
     Type type;
+    @Enumerated(EnumType.STRING)
     Wood backWood;
+    @Enumerated(EnumType.STRING)
     Wood topWood;
+
+    public Guitar() {
+    }
 
     public Guitar(String sNum, double price, Builder builder, String model, Type type, Wood backWood, Wood topWood) {
         this.serialNumber = sNum;

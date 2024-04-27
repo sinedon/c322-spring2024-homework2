@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -23,24 +24,24 @@ public class InventoryController {
     @PostMapping("/add")
     public boolean add(@RequestBody Guitar data) {
         try {
-            return InventoryRepository.addGuitar(data);
-        } catch (IOException e) {
+            inventoryRepository.save(data);
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
     @GetMapping("/get/{serialNumber}")
     public ResponseEntity<Guitar> getGuitar(@PathVariable String serialNumber) {
         try {
             System.out.println("Serial Number: " + serialNumber);
-            Guitar guitar = InventoryRepository.getGuitar(serialNumber);
-            if (guitar != null) {
-                return ResponseEntity.ok(guitar);
+            List<Guitar> guitars = inventoryRepository.findBySerialNumber(serialNumber);
+            if (!guitars.isEmpty()) {
+                return ResponseEntity.ok(guitars.get(0));
             } else {
                 return ResponseEntity.notFound().build();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -64,10 +65,13 @@ public class InventoryController {
             System.out.println("Back Wood: " + backWood);
             System.out.println("Top Wood: " + topWood);
 
-            return InventoryRepository.search(serialNumber, price, builder, model, type, backWood, topWood);
-        } catch (IOException e) {
+            List<Guitar> guitars = inventoryRepository.search(
+                    serialNumber, price, builder, model, type, backWood, topWood);
+
+            return guitars;
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return Collections.emptyList();
         }
     }
 

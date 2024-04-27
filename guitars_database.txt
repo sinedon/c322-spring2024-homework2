@@ -1,2 +1,1 @@
 1,999.99,Fender,ACOUSTIC,acoustic,Mahogany,Alder
-null,999.99,Fender,ACOUSTIC,acoustic,Mahogany,Alder
