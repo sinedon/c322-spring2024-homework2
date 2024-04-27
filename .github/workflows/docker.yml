@@ -34,5 +34,5 @@ jobs:
       - name: Build and push the image
         run: |
           docker login --username sinedon --password ${{secrets.ACCESS_TOKEN}} ghcr.io
-          docker build -t ghcr.io/sinedon/guitar-services:latest --file Dockerfile .  
-          docker push ghcr.io/sinedon/guitar-services:latest 
+          docker build -t ghcr.io/sinedon/guitar-serviceshw9:latest --file Dockerfile .  
+          docker push ghcr.io/sinedon/guitar-serviceshw9:latest 

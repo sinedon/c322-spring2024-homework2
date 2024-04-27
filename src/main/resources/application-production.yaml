@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-cogrurud3nmc73dsunn0-a.oregon-postgres.render.com:5432/ducks_7zj5
+    username: ducks_7zj5_user
+    password: UMmC0WcF8Joke8pNC9BiGV06fh8HPHQK
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  sql:
+    init:
+      mode: always
